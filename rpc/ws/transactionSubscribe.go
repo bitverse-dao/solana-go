@@ -64,6 +64,9 @@ func (cl *Client) TransactionSubscribe(
 		"transactionUnSubscribe",
 		func(msg []byte) (interface{}, error) {
 			var res TransactionResult
+			if len(msg) == 0 {
+				return nil, nil
+			}
 			err := decodeResponseFromMessage(msg, &res)
 			return &res, err
 		},
